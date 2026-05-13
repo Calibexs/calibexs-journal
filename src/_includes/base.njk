@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ title }} — calibexs journal</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #05010a;
+  color: #f5f3ff;
+  line-height: 1.8;
+}
+
+main {
+  max-width: 760px;
+  margin: auto;
+  padding: 60px 22px;
+}
+
+a {
+  color: #c084fc;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #f5d0fe;
+}
+
+.card {
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 24px;
+  padding: 24px;
+  margin: 18px 0;
+}
+
+.date {
+  color: #a78bfa;
+  font-size: 14px;
+}
+
+h1 {
+  font-size: 48px;
+  letter-spacing: -2px;
+}
+
+.home {
+  display: inline-block;
+  margin-bottom: 35px;
+}
+</style>
+</head>
+
+<body>
+<main>
+<a class="home" href="/">← home</a>
+{{ content | safe }}
+</main>
+</body>
+</html>
