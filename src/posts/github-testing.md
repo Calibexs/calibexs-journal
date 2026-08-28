@@ -1,7 +1,7 @@
 ---
 layout: base.njk
 title: testing auto pull from github
-description: the journal is live.
+description: Testing the calibexs GitHub-to-VPS deployment workflow and confirming journal updates automatically pull, build, and publish from the repository.
 date: 2026-05-13
 tags: post
 ---

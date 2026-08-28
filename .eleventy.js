@@ -3,8 +3,17 @@ module.exports = function(eleventyConfig) {
     return new Date(date).toLocaleDateString("en-US", {
       year: "numeric",
       month: "long",
-      day: "numeric"
+      day: "numeric",
+      timeZone: "UTC"
     });
+  });
+
+  eleventyConfig.addFilter("isoDate", function(date) {
+    return new Date(date).toISOString();
+  });
+
+  eleventyConfig.addFilter("json", function(value) {
+    return JSON.stringify(value);
   });
 
   return {

@@ -1,7 +1,7 @@
 ---
 layout: base.njk
 title: major vps update
-description: a big update to calibexs.com and my VPS.
+description: A major calibexs VPS update covering self-hosted services, monitoring, backups, Cloudflare, Docker, developer tools, file sharing, and image hosting.
 date: 2026-08-26
 tags: post
 ---

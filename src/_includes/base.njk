@@ -4,68 +4,65 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>{{ title }} — calibexs journal</title>
+{% set journalHome = page.url == "/" %}
+{% set pageTitle = seoTitle or title %}
+{% set pageDescription = description or "Technical notes, project updates, infrastructure logs, experiments, and development posts from calibexs." %}
+{% set canonicalUrl = "https://calibexs.com/journal" + page.url %}
 
+{% if journalHome %}
+<title>technical journal & project logs — calibexs</title>
+{% else %}
+<title>{{ pageTitle }} — calibexs journal</title>
+{% endif %}
+
+<meta name="description" content="{{ pageDescription }}">
+<meta name="author" content="calibexs">
 <meta name="theme-color" content="#7c3aed">
 
-<meta
-  name="description"
-  content="{{ description or 'calibexs journal — notes, updates, projects, logs, and random posts.' }}"
->
+<link rel="canonical" href="{{ canonicalUrl }}">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
 
-<meta
-  name="keywords"
-  content="calibexs, journal, blog, urbex, cars, servers, projects"
->
+<meta property="og:site_name" content="calibexs">
 
-<meta name="author" content="calibexs">
+{% if journalHome %}
+<meta property="og:title" content="technical journal & project logs — calibexs">
+{% else %}
+<meta property="og:title" content="{{ pageTitle }} — calibexs journal">
+{% endif %}
 
-<meta property="og:title" content="{{ title }} — calibexs journal">
+<meta property="og:description" content="{{ pageDescription }}">
 
-<meta
-  property="og:description"
-  content="{{ description or 'calibexs journal — notes, updates, projects, logs, and random posts.' }}"
->
-
+{% if isPost %}
 <meta property="og:type" content="article">
+<meta property="article:published_time" content="{{ date | isoDate }}">
+{% else %}
+<meta property="og:type" content="website">
+{% endif %}
 
-<meta
-  property="og:url"
-  content="https://calibexs.com{{ page.url }}"
->
+<meta property="og:url" content="{{ canonicalUrl }}">
+<meta property="og:image" content="https://calibexs.com/preview.svg">
+<meta property="og:image:alt" content="calibexs">
 
-<meta
-  property="og:image"
-  content="https://calibexs.com/preview.svg"
->
-
-<meta name="twitter:card" content="summary_large_image">
-
-<meta
-  name="twitter:title"
-  content="{{ title }} — calibexs journal"
->
-
-<meta
-  name="twitter:description"
-  content="{{ description or 'calibexs journal — notes, updates, projects, logs, and random posts.' }}"
->
-
-<meta
-  name="twitter:image"
-  content="https://calibexs.com/preview.svg"
->
-
-<link
-  rel="icon"
-  type="image/svg+xml"
-  href="https://calibexs.com/favicon.svg"
->
-
-<link
-  rel="shortcut icon"
-  href="https://calibexs.com/favicon.svg"
->
+{% if isPost %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": {{ pageTitle | json | safe }},
+  "description": {{ pageDescription | json | safe }},
+  "datePublished": {{ date | isoDate | json | safe }},
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": {{ canonicalUrl | json | safe }}
+  },
+  "author": {
+    "@type": "Person",
+    "name": "calibexs",
+    "url": "https://calibexs.com/"
+  }
+}
+</script>
+{% endif %}
 
 <style>
 
@@ -141,7 +138,7 @@ p{
 
 <main>
 
-{% if title == "journal" %}
+{% if journalHome %}
   <a class="home" href="/">← home</a>
 {% else %}
   <a class="home" href="/journal/">← back to journal</a>
