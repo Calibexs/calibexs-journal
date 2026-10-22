@@ -131,7 +131,144 @@ p{
   margin-bottom:18px;
 }
 
+
+/* CALIBEXS JOURNAL VISUAL REFRESH */
+:root {
+  color-scheme: dark;
+}
+
+body {
+  background:
+    radial-gradient(ellipse at 8% 12%,
+      rgba(112,35,164,.13), transparent 38%),
+    radial-gradient(ellipse at 95% 65%,
+      rgba(99,54,180,.08), transparent 45%),
+    #07030d;
+  color: #f3eefa;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.65;
+}
+
+main {
+  max-width: 1180px;
+  padding: 42px 28px 90px;
+}
+
+main > [data-cx-navigation] {
+  margin-bottom: 76px;
+}
+
+h1 {
+  font-size: clamp(54px, 8vw, 112px);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -.065em;
+  margin-bottom: 22px;
+  background: linear-gradient(100deg,
+    #e8b9ff 0%, #c58afa 50%, #8980ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+main > p {
+  max-width: 760px;
+  color: #bfaad9;
+  font-size: clamp(16px, 1.7vw, 19px);
+  line-height: 1.7;
+  margin-bottom: 35px;
+}
+
+.card {
+  display: block;
+  background: rgba(19,13,27,.88);
+  border: 1px solid rgba(210,174,240,.11);
+  border-radius: 25px;
+  padding: 28px 30px;
+  margin: 16px 0;
+  color: #f3eefa;
+  transition:
+    transform .2s ease,
+    border-color .2s ease,
+    box-shadow .2s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(168,85,247,.43);
+  box-shadow: 0 12px 35px rgba(75,25,115,.14);
+  color: #fff;
+}
+
+.card h2, .card h3 {
+  line-height: 1.3;
+  letter-spacing: -.025em;
+  margin: 12px 0;
+}
+
+.card p {
+  font-size: 15px;
+  color: #bda9d8;
+  line-height: 1.7;
+  margin: 10px 0;
+}
+
+.date {
+  color: #c79af0;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .02em;
+  margin-bottom: 12px;
+}
+
+a { color: #c69af8; }
+
+@media(max-width:700px) {
+  main { padding: 24px 20px 65px; }
+  main > [data-cx-navigation] {
+    margin-bottom: 48px;
+  }
+  h1 { letter-spacing: -.05em; }
+  .card { padding: 22px; border-radius: 20px; }
+}
+
+
+/* CALIBEXS JOURNAL PAGINATION */
+.cx-pagination {
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:10px;
+  margin:40px auto 10px;
+}
+.cx-pagination:empty { display:none; }
+.cx-pagination a {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width:42px;
+  padding:10px 15px;
+  background:rgba(255,255,255,.025);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:999px;
+  color:#e7d7f7;
+  font-size:13px;
+  text-decoration:none;
+}
+.cx-pagination a:hover {
+  border-color:rgba(168,85,247,.45);
+  background:rgba(168,85,247,.12);
+}
+.cx-pagination a[aria-current="page"] {
+  color:#d6abff;
+  font-weight:700;
+  border-color:rgba(168,85,247,.5);
+  background:rgba(168,85,247,.15);
+}
+
 </style>
+<link rel="stylesheet" href="/shared-calibexs/navigation.css?v=1">
 </head>
 
 <body>
@@ -139,7 +276,7 @@ p{
 <main>
 
 {% if journalHome %}
-  <a class="home" href="/">← home</a>
+  <nav data-cx-navigation aria-label="Main navigation"></nav>
 {% else %}
   <a class="home" href="/journal/">← back to journal</a>
 {% endif %}
@@ -148,5 +285,6 @@ p{
 
 </main>
 
+<script src="/shared-calibexs/navigation.js?v=1" defer></script>
 </body>
 </html>

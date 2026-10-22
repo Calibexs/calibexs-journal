@@ -2,12 +2,19 @@
 layout: base.njk
 title: journal
 description: Read the calibexs journal for technical project logs, VPS and infrastructure updates, development experiments, website changes, automation, and ongoing builds.
+
+pagination:
+  data: collections.post
+  size: 4
+  alias: paginatedPosts
+  reverse: true
+permalink: "{% if pagination.pageNumber == 0 %}index.html{% else %}page/{{ pagination.pageNumber + 1 }}/index.html{% endif %}"
 ---
 
 <h1>calibexs journal</h1>
 <p>technical notes, project updates, infrastructure logs, experiments, and development posts.</p>
 
-{% for post in collections.post | reverse %}
+{% for post in paginatedPosts %}
 
   <a
     href="/journal/posts/{{ post.fileSlug }}/"
@@ -37,3 +44,29 @@ description: Read the calibexs journal for technical project logs, VPS and infra
   </a>
 
 {% endfor %}
+
+
+<nav class="cx-pagination" aria-label="Journal pages">
+{% if pagination.pages.length > 1 %}
+
+  {% if pagination.pageNumber > 0 %}
+  <a href="{% if pagination.pageNumber == 1 %}/journal/{% else %}/journal/page/{{ pagination.pageNumber }}/{% endif %}">
+    ← Previous
+  </a>
+  {% endif %}
+
+  {% for entry in pagination.pages %}
+  <a href="{% if loop.index == 1 %}/journal/{% else %}/journal/page/{{ loop.index }}/{% endif %}"
+     {% if pagination.pageNumber == loop.index0 %}aria-current="page"{% endif %}>
+    {{ loop.index }}
+  </a>
+  {% endfor %}
+
+  {% if pagination.pageNumber + 1 < pagination.pages.length %}
+  <a href="/journal/page/{{ pagination.pageNumber + 2 }}/">
+    Next →
+  </a>
+  {% endif %}
+
+{% endif %}
+</nav>
